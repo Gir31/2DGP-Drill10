@@ -1,5 +1,6 @@
 import game_framework
 from pico2d import load_image, get_time, clear_canvas, update_canvas, get_events
+from Lecture14_Game_Framework import title_mode
 
 
 def init():
@@ -17,7 +18,7 @@ def update():
     global logo_start_time
     if get_time() - logo_start_time >= 2.0:
         logo_start_time = get_time()
-        game_framework.quit()
+        game_framework.change_mode(title_mode)
 
 def draw():
     clear_canvas()
@@ -26,3 +27,9 @@ def draw():
 
 def handle_events():
     events = get_events()
+
+def pause():
+    pass
+
+def resume():
+    pass

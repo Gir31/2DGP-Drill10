@@ -1,6 +1,8 @@
 # 이것은 각 상태들을 객체로 구현한 것임.
 
 from pico2d import get_time, load_image, SDL_KEYDOWN, SDL_KEYUP, SDLK_SPACE, SDLK_LEFT, SDLK_RIGHT
+
+from Lecture14_Game_Framework.ball import BigBall
 from state_machine import *
 from ball import Ball
 import game_world
@@ -107,6 +109,7 @@ class Boy:
                 Sleep: {right_down: Run, left_down: Run, right_up: Run, left_up: Run, space_down: Idle}
             }
         )
+        self.set_item('NONE')
 
     def update(self):
         self.state_machine.update()
@@ -119,6 +122,16 @@ class Boy:
     def draw(self):
         self.state_machine.draw()
 
+    def set_item(self, item):
+        self.item = item
+
     def fire_ball(self):
-        ball = Ball(self.x, self.y, self.face_dir * 10)
-        game_world.add_object(ball)
+        if self.item == 'SmallBall':
+            ball = Ball(self.x, self.y, self.face_dir * 10)
+            game_world.add_object(ball)
+
+        elif self.item == 'BigBall':
+            ball = BigBall(self.x, self.y, self.face_dir * 10)
+            game_world.add_object(ball)
+
+
